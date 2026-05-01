@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order #{{ order.order_id }} - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f5f7fb;
+    color:#111827;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* Navbar */
+.navbar{
+    width:100%;
+    background:linear-gradient(135deg,#1e3a8a,#2563eb);
+    padding:14px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#ffffff22;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.logo h1{
+    font-size:28px;
+    font-weight:800;
+}
+
+.logo h1 span{
+    color:#f97316;
+}
+
+/* Menu */
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    color:#fff;
+    cursor:pointer;
+}
+
+.nav-links{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#fff;
+    padding:10px 16px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:700;
+    background:rgba(255,255,255,.12);
+    transition:.3s;
+}
+
+.nav-links a:hover{
+    background:#fff;
+    color:#2563eb;
+}
+
+/* Main */
+.container{
+    max-width:1200px;
+    width:100%;
+    margin:35px auto;
+    padding:0 20px;
+    flex:1;
+}
+
+.card{
+    background:#fff;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.header h2{
+    font-size:32px;
+    word-break:break-word;
+}
+
+.status-badge{
+    background:#dbeafe;
+    color:#1d4ed8;
+    padding:8px 14px;
+    border-radius:30px;
+    font-weight:700;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.info-box{
+    background:#f9fafb;
+    padding:18px;
+    border-radius:16px;
+}
+
+.info-box h4{
+    font-size:15px;
+    color:#6b7280;
+    margin-bottom:8px;
+}
+
+.info-box p{
+    font-size:18px;
+    font-weight:700;
+    word-break:break-word;
+}
+
+.section-title{
+    font-size:24px;
+    margin:25px 0 15px;
+}
+
+.form-box{
+    background:#eff6ff;
+    padding:18px;
+    border-radius:16px;
+    margin-bottom:25px;
+}
+
+form{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+select{
+    flex:1;
+    min-width:220px;
+    padding:12px;
+    border:2px solid #d1d5db;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+}
+
+button{
+    border:none;
+    background:#2563eb;
+    color:#fff;
+    padding:12px 18px;
+    border-radius:12px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.table-card{
+    overflow:hidden;
+    border-radius:18px;
+    border:1px solid #e5e7eb;
+}
+
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:600px;
+}
+
+th{
+    background:#eff4ff;
+    color:#1e3a8a;
+    text-align:left;
+    padding:14px;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+tr:hover{
+    background:#f9fafb;
+}
+
+.back{
+    text-align:center;
+    margin-top:25px;
+}
+
+.back a{
+    text-decoration:none;
+    color:#2563eb;
+    font-weight:700;
+}
+
+/* Footer */
+.footer{
+    width:100%;
+    text-align:center;
+    padding:18px 15px;
+    background:#ffffff;
+    color:#111827;
+    font-size:15px;
+    border-top:1px solid #e5e7eb;
+    margin-top:30px;
+}
+
+/* Tablet */
+@media(max-width:768px){
+
+    .navbar{
+        flex-wrap:wrap;
+        padding:15px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .logo h1{
+        font-size:24px;
+    }
+
+    .nav-links{
+        width:100%;
+        display:none;
+        flex-direction:column;
+        gap:10px;
+        margin-top:15px;
+    }
+
+    .nav-links.show{
+        display:flex;
+    }
+
+    .nav-links a{
+        width:100%;
+        text-align:center;
+    }
+
+    .header h2{
+        font-size:27px;
+    }
+
+    .card{
+        padding:22px;
+    }
+
+    form{
+        flex-direction:column;
+    }
+
+    select,
+    button{
+        width:100%;
+    }
+}
+
+/* Mobile */
+@media(max-width:480px){
+
+    .navbar{
+        padding:12px;
+    }
+
+    .logo-icon{
+        width:40px;
+        height:40px;
+        font-size:20px;
+    }
+
+    .logo h1{
+        font-size:22px;
+    }
+
+    .container{
+        padding:0 12px;
+        margin:20px auto;
+    }
+
+    .card{
+        padding:18px;
+        border-radius:18px;
+    }
+
+    .header h2{
+        font-size:24px;
+    }
+
+    .section-title{
+        font-size:20px;
+    }
+
+    .info-box p{
+        font-size:16px;
+    }
+
+    select,
+    button{
+        font-size:14px;
+        padding:12px;
+    }
+
+    .footer{
+        font-size:14px;
+        padding:15px 10px;
+    }
+}
+
+/* Extra Small */
+@media(max-width:320px){
+
+    .card{
+        padding:15px;
+    }
+
+    .header h2{
+        font-size:20px;
+    }
+
+    .section-title{
+        font-size:18px;
+    }
+
+    table{
+        min-width:500px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<div class="navbar">
+
+    <div class="logo">
+        <div class="logo-icon">🛍️</div>
+        <h1>Smart<span>Cart</span></h1>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navMenu">
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/admin/orders">Orders</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+
+</div>
+
+<!-- Main -->
+<div class="container">
+
+    <div class="card">
+
+        <div class="header">
+            <h2>Order #{{ order.order_id }}</h2>
+            <span class="status-badge">{{ order.order_status }}</span>
+        </div>
+
+        <h3 class="section-title">Customer Details</h3>
+
+        <div class="grid">
+            <div class="info-box">
+                <h4>Customer Name</h4>
+                <p>{{ order.user_name }}</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Email Address</h4>
+                <p>{{ order.user_email }}</p>
+            </div>
+
+            
+
+            <div class="info-box">
+                <h4>Delivery Address</h4>
+                <p>{{ order.address }}</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">Order Summary</h3>
+
+        <div class="grid">
+            <div class="info-box">
+                <h4>Payment Status</h4>
+                <p>{{ order.payment_status }}</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Total Amount</h4>
+                <p>₹{{ order.amount }}</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Order Date</h4>
+                <p>{{ order.created_at }}</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Current Status</h4>
+                <p>{{ order.order_status }}</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">Update Order Status</h3>
+
+        <div class="form-box">
+            <form method="POST" action="/admin/update-order-status/{{ order.order_id }}">
+                <select name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                    <option value="Packed">Packed</option>
+                    <option value="Shipped">Shipped</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+
+                <button type="submit">Update</button>
+            </form>
+        </div>
+
+        <h3 class="section-title">Ordered Items</h3>
+
+        <div class="table-card">
+            <div class="table-wrap">
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                    </tr>
+
+                    {% for it in items %}
+                    <tr>
+                        <td>{{ it.product_name }}</td>
+                        <td>{{ it.quantity }}</td>
+                        <td>₹{{ it.price }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+        <div class="back">
+            <a href="/admin/orders">← Back to Orders</a>
+        </div>
+
+    </div>
+
+</div>
+
+<footer class="footer">
+    © 2026 SuchiVaddadi Admin Panel
+</footer>
+
+<script>
+function toggleMenu(){
+    document.getElementById("navMenu").classList.toggle("show");
+}
+</script>
+
+</body>
+</html>

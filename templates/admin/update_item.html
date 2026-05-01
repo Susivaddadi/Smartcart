@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Update Product - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:#f5f7fb;
+    color:#111827;
+    display:flex;
+    flex-direction:column;
+}
+
+/* NAVBAR */
+.navbar{
+    width:100%;
+    background:linear-gradient(135deg,#1e3a8a,#2563eb);
+    padding:14px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+    position:relative;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#fff;
+}
+
+.logo-icon{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#ffffff22;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+}
+
+.logo h1{
+    font-size:28px;
+    font-weight:800;
+}
+
+.logo h1 span{
+    color:#f97316;
+}
+
+/* HAMBURGER */
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:900;
+}
+
+/* NAV LINKS */
+.nav-links{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#fff;
+    padding:10px 16px;
+    border-radius:10px;
+    font-size:15px;
+    font-weight:700;
+    background:rgba(255,255,255,.12);
+    transition:0.3s;
+}
+
+.nav-links a:hover{
+    background:#fff;
+    color:#2563eb;
+}
+
+/* MAIN */
+.container{
+    max-width:720px;
+    width:100%;
+    margin:40px auto;
+    padding:0 20px;
+    flex:1;
+}
+
+.card{
+    background:#fff;
+    border-radius:22px;
+    padding:35px;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+    width:100%;
+}
+
+.card h2{
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.sub{
+    color:#6b7280;
+    margin-bottom:25px;
+}
+
+.flash-msg p{
+    background:#dcfce7;
+    color:#166534;
+    border:1px solid #86efac;
+    padding:14px;
+    border-radius:12px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:700;
+    color:#374151;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:14px;
+    border:2px solid #d1d5db;
+    border-radius:12px;
+    font-size:16px;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#2563eb;
+    outline:none;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.old-img{
+    width:130px;
+    height:130px;
+    object-fit:cover;
+    border-radius:14px;
+}
+
+.file-box{
+    background:#f9fafb;
+    padding:10px;
+}
+
+button{
+    width:100%;
+    border:none;
+    background:#2563eb;
+    color:#fff;
+    padding:16px;
+    border-radius:14px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:18px;
+    background:#fff;
+    border-top:1px solid #e5e7eb;
+    font-size:15px;
+    margin-top:auto;
+}
+
+/* TABLET */
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-links{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        background:rgba(255,255,255,.12);
+        padding:10px;
+        border-radius:12px;
+    }
+
+    .nav-links.active{
+        display:flex;
+    }
+
+    .logo h1{
+        font-size:24px;
+    }
+
+    .container{
+        margin:25px auto;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+    .card{
+        padding:18px;
+    }
+
+    .card h2{
+        font-size:24px;
+    }
+
+    input,
+    textarea,
+    button{
+        font-size:15px;
+        padding:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+
+    <div class="logo">
+        <div class="logo-icon">🛍️</div>
+        <h1>Smart<span>Cart</span></h1>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-links" id="navLinks">
+        <a href="/admin-dashboard">Dashboard</a>
+        <a href="/admin/add-item">Add Product</a>
+        <a href="/admin/item-list">Products</a>
+        <a href="/admin/profile">Profile</a>
+        <a href="/admin-logout">Logout</a>
+    </div>
+
+</div>
+
+<!-- MAIN -->
+<div class="container">
+    <div class="card">
+
+        <h2>Update Product</h2>
+        <p class="sub">Edit product details and update image if needed.</p>
+
+        <div class="flash-msg">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% for category, message in messages %}
+                <p>{{ message }}</p>
+              {% endfor %}
+            {% endwith %}
+        </div>
+
+        <form method="POST" action="/admin/update-item/{{ product.product_id }}" enctype="multipart/form-data">
+
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" name="name" value="{{ product.name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" required>{{ product.description }}</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" name="category" value="{{ product.category }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input type="number" name="price" value="{{ product.price }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Current Image</label>
+                <img src="/static/uploads/product_images/{{ product.image }}" class="old-img">
+            </div>
+
+            <div class="form-group">
+                <label>New Image (Optional)</label>
+                <input type="file" name="image" class="file-box">
+            </div>
+
+            <button type="submit">Update Product</button>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+    © 2026 SmartCart Admin Panel
+</footer>
+
+<!-- SCRIPT -->
+<script>
+function toggleMenu(){
+    document.getElementById("navLinks").classList.toggle("active");
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delivery Address - SmartCart</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
+
+body{
+    background:#f8f9fb;
+}
+
+/* HEADER */
+.header{
+    position:sticky;
+    top:0;
+    background:linear-gradient(135deg,#ff3f6c,#ff6b8f);
+    padding:15px;
+}
+
+.logo{
+    color:#fff;
+    font-size:26px;
+    font-weight:bold;
+}
+
+/* MAIN */
+.wrapper{
+    max-width:1100px;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:20px;
+}
+
+/* CARDS */
+.card{
+    background:#fff;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.08);
+}
+
+h2,h3{
+    margin-bottom:15px;
+}
+
+/* FORM */
+.form-group{
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    border:none;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.save-btn{
+    background:#ff3f6c;
+    color:#fff;
+}
+
+.edit-btn{
+    background:#111827;
+    color:#fff;
+    margin-top:10px;
+}
+
+.use-btn{
+    background:#16a34a;
+    color:#fff;
+    margin-top:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+    .wrapper{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo">SmartCart</div>
+</div>
+
+<div class="wrapper">
+
+<!-- LEFT -->
+<div class="card">
+
+<h2>Delivery Address</h2>
+
+<form method="POST">
+
+<div class="form-group">
+<input type="text" name="name" placeholder="Name" value="{{ addresses.name }}">
+</div>
+
+<div class="form-group">
+<input type="text" name="address" placeholder="Address" value="{{ addresses.address }}">
+</div>
+
+<div class="form-group">
+<input type="text" name="city" placeholder="City" value="{{ addresses.city }}">
+</div>
+
+<div class="form-group">
+<input type="text" name="pincode" placeholder="Pincode" value="{{ addresses.pincode }}">
+</div>
+
+<button class="save-btn">Save Address</button>
+
+</form>
+
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+
+<h3>Saved Address</h3>
+
+<p><b>Name:</b> {{ addresses.name }}</p>
+<p><b>Address:</b> {{ addresses.address }}</p>
+<p><b>City:</b> {{ addresses.city }}</p>
+<p><b>Pincode:</b> {{ addresses.pincode }}</p>
+
+<a href="/edit_address">
+    <button class="edit-btn">Edit Address</button>
+</a>
+
+{% if addresses and addresses.id %}
+<form method="POST" action="{{ url_for('continue_payment', address_id=addresses.id) }}">
+    <button class="use-btn">Use Address and Pay</button>
+</form>
+{% else %}
+<button class="use-btn" onclick="alert('Please save address first')">
+    Use Address and Pay
+</button>
+{% endif %}
+
+</div>
+
+</div>
+
+</body>
+</html>

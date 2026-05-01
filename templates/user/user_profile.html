@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Profile - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f8f9fb;
+    color:#111827;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:linear-gradient(135deg,#ff3f6c,#ff6b8f);
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+}
+
+.header-container{
+    max-width:1400px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 22px;
+    gap:14px;
+    position:relative;
+}
+
+/* LOGO */
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#ffffff22;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+}
+
+.logo-text{
+    font-size:34px;
+    font-weight:900;
+    color:#fff;
+}
+
+.logo-text span{
+    color:#111827;
+}
+
+/* NAVBAR SAME AS DASHBOARD */
+.navbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.navbar a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    padding:10px 18px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.12);
+    transition:0.3s;
+}
+
+.navbar a:hover,
+.navbar .active{
+    background:#fff;
+    color:#ff3f6c;
+}
+
+/* MENU ICON */
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* FLASH */
+.flash{
+    max-width:1400px;
+    margin:auto;
+    padding:16px;
+}
+
+.flash p{
+    background:#e8fff0;
+    color:#0f7a35;
+    padding:12px;
+    border-radius:10px;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+/* BODY */
+.profile-page{
+    padding:30px 16px;
+    display:flex;
+    justify-content:center;
+}
+
+.profile-card{
+    width:100%;
+    max-width:720px;
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+.profile-top{
+    background:linear-gradient(135deg,#ff3f6c,#ff7aa2);
+    color:#fff;
+    padding:40px 20px;
+    text-align:center;
+}
+
+.avatar{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+    background:#fff;
+    margin:0 auto 14px;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:4px solid rgba(255,255,255,0.4);
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.avatar span{
+    font-size:42px;
+    color:#ff3f6c;
+    font-weight:900;
+}
+
+.profile-top h2{
+    font-size:28px;
+}
+
+.profile-body{
+    padding:28px 22px;
+}
+
+.form-group{
+    margin-bottom:16px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:800;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    border-color:#ff3f6c;
+    box-shadow:0 0 0 3px rgba(255,63,108,0.15);
+}
+
+input[type="file"]{
+    background:#fff;
+    padding:10px;
+}
+
+.preview-text{
+    font-size:13px;
+    color:#6b7280;
+    margin-top:6px;
+}
+
+.btn-row{
+    display:flex;
+    gap:12px;
+    margin-top:22px;
+}
+
+button,
+.logout-btn{
+    flex:1;
+    border:none;
+    padding:12px 18px;
+    border-radius:12px;
+    font-weight:800;
+    cursor:pointer;
+    text-decoration:none;
+    text-align:center;
+}
+
+.save-btn{
+    background:#ff3f6c;
+    color:#fff;
+}
+
+.logout-btn{
+    background:#111827;
+    color:#fff;
+}
+
+/* FOOTER */
+.footer{
+    background:#fff;
+    text-align:center;
+    padding:16px;
+    font-size:14px;
+    color:#111827;
+    border-top:1px solid #e5e7eb;
+    margin-top:20px;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .logo-text{
+        font-size:26px;
+    }
+
+    .navbar{
+        display:none;
+        flex-direction:column;
+        position:absolute;
+        top:72px;
+        right:15px;
+        width:220px;
+        background:#ff4d7d;
+        padding:12px;
+        border-radius:14px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.15);
+        z-index:999;
+    }
+
+    .navbar.show{
+        display:flex;
+    }
+
+    .navbar a{
+        width:100%;
+        text-align:center;
+        margin:4px 0;
+    }
+
+    .btn-row{
+        flex-direction:column;
+    }
+}
+
+@media(max-width:480px){
+
+    .header-container{
+        padding:12px;
+    }
+
+    .logo-icon{
+        width:40px;
+        height:40px;
+        font-size:20px;
+    }
+
+    .logo-text{
+        font-size:24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+<div class="header-container">
+
+<div class="brand">
+<div class="logo-icon">🛍️</div>
+<div class="logo-text">Smart<span>Cart</span></div>
+</div>
+
+<div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+<div class="navbar" id="mobileMenu">
+<a href="/user-dashboard">Home</a>
+<a href="/user/products">Products</a>
+<a href="/user/cart">Cart</a>
+<a href="/user-profile" class="active">Profile</a>
+<a href="/user-logout">Logout</a>
+</div>
+
+</div>
+</div>
+
+<!-- FLASH -->
+<div class="flash">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endif %}
+{% endwith %}
+</div>
+
+<!-- BODY -->
+<div class="profile-page">
+
+<div class="profile-card">
+
+<div class="profile-top">
+
+<div class="avatar">
+{% if user.profile_image %}
+<img src="{{ url_for('static', filename='uploads/user_profiles/' + user.profile_image) }}">
+{% else %}
+<span>{{ user.name[0] }}</span>
+{% endif %}
+</div>
+
+<h2>{{ user.name }}</h2>
+
+</div>
+
+<div class="profile-body">
+
+<form method="POST" action="/user-profile" enctype="multipart/form-data">
+
+<div class="form-group">
+<label>Full Name</label>
+<input type="text" name="name" value="{{ user.name }}" required>
+</div>
+
+<div class="form-group">
+<label>Email Address</label>
+<input type="email" name="email" value="{{ user.email }}" required>
+</div>
+
+<div class="form-group">
+<label>New Password</label>
+<input type="password" name="password" placeholder="Enter new password">
+</div>
+
+<div class="form-group">
+<label>Profile Image</label>
+<input type="file" name="profile_image" accept="image/*">
+<div class="preview-text">Choose JPG, PNG or JPEG image</div>
+</div>
+
+<div class="btn-row">
+<button type="submit" class="save-btn">Update Profile</button>
+<a href="/user-logout" class="logout-btn">Logout</a>
+</div>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 SuchiVaddadi. All Rights Reserved.
+</div>
+
+<script>
+function toggleMenu(){
+document.getElementById("mobileMenu").classList.toggle("show");
+}
+</script>
+
+</body>
+</html>

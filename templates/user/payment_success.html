@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Successful</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f8f9fb;
+    color:#111827;
+}
+
+/* HEADER (CONSISTENT) */
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:linear-gradient(135deg,#ff3f6c,#ff6b8f);
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+}
+
+.top-bar{
+    padding:14px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#fff;
+    color:#ff3f6c;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+}
+
+.logo-text{
+    font-size:28px;
+    font-weight:900;
+    color:#fff;
+}
+
+.logo-text span{
+    color:#111827;
+}
+
+.nav-menu{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-menu a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    padding:10px 16px;
+    border-radius:10px;
+}
+
+.nav-menu a:hover{
+    background:#fff;
+    color:#ff3f6c;
+}
+
+/* BODY (UNCHANGED STYLE, JUST WRAPPED RESPONSIVE FEEL) */
+.content{
+    padding:40px 16px;
+    text-align:center;
+}
+
+h2{
+    color:green;
+}
+
+/* FOOTER */
+.footer{
+    margin-top:40px;
+    background:#ffffff;
+    color:#111827;
+    text-align:center;
+    padding:16px 10px;
+    font-size:14px;
+    border-top:1px solid #e5e7eb;
+}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+
+    .top-bar{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .logo-text{
+        font-size:24px;
+    }
+
+    .nav-menu{
+        justify-content:center;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <div class="top-bar">
+
+        <div class="brand">
+            <div class="logo-icon">📍</div>
+            <div class="logo-text">Smart<span>Cart</span></div>
+        </div>
+
+        <div class="nav-menu">
+            <a href="/user-dashboard">Home</a>
+            <a href="/user/products">Products</a>
+            <a href="/user/cart">Cart</a>
+            <a href="/user/profile">Profile</a>
+            <a href="/user-logout">Logout</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- BODY (UNCHANGED) -->
+<div class="content">
+
+<h2 style="color:green;">Payment Successful!</h2>
+
+<p>Payment ID: {{ payment_id }}</p>
+<p>Order ID: {{ order_id }}</p>
+
+<a href="/user/products">Continue Shopping</a>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 SuchiVaddadi. All Rights Reserved
+</div>
+
+</body>
+</html>

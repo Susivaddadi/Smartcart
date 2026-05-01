@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Registration - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#ff4b7d,#ff6b9a,#1b2640);
+    padding:20px;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* TOP RIGHT BUTTONS EXACT POSITION */
+.top-links{
+    position:absolute;
+    top:15px;
+    right:20px;
+    display:flex;
+    gap:12px;
+    z-index:10;
+}
+
+.top-links a{
+    text-decoration:none;
+    background:#ffffff;
+    color:#ff3e6c;
+    padding:12px 18px;
+    border-radius:10px;
+    font-size:16px;
+    font-weight:700;
+    min-width:88px;
+    text-align:center;
+    transition:0.3s;
+}
+
+.top-links a:hover{
+    background:#0f172a;
+    color:#fff;
+}
+
+/* FORM BOX */
+.container{
+    width:100%;
+    max-width:460px;
+    background:#fff;
+    padding:35px 30px;
+    border-radius:22px;
+    box-shadow:0 18px 40px rgba(0,0,0,0.22);
+}
+
+/* LOGO */
+.logo{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.logo-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.logo-icon{
+    width:65px;
+    height:65px;
+    border-radius:50%;
+    background:linear-gradient(135deg,#ff4b7d,#ff2f68);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
+    color:#fff;
+}
+
+.logo h1{
+    font-size:38px;
+    font-weight:800;
+    color:#111827;
+}
+
+.logo h1 span{
+    color:#ff3e6c;
+}
+
+.logo p{
+    margin-top:10px;
+    color:#6b7280;
+    font-size:16px;
+}
+
+/* HEADINGS */
+.heading{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.heading h2{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.heading p{
+    color:#6b7280;
+}
+
+/* FLASH */
+.flash-msg{
+    margin-bottom:18px;
+}
+
+.flash-msg p{
+    background:#fff1f2;
+    color:#991b1b;
+    border:1px solid #fecdd3;
+    padding:14px;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+
+/* FORM */
+.form-group{
+    margin-bottom:18px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-size:15px;
+    font-weight:700;
+    color:#374151;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:2px solid #d1d5db;
+    border-radius:13px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus{
+    border-color:#ff3e6c;
+}
+
+button{
+    width:100%;
+    padding:16px;
+    background:#0f172a;
+    color:#fff;
+    border:none;
+    border-radius:14px;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:#ff3e6c;
+}
+
+/* LINKS */
+.extra-links{
+    text-align:center;
+    margin-top:20px;
+}
+
+.extra-links p{
+    color:#6b7280;
+    margin-bottom:10px;
+}
+
+.extra-links a{
+    color:#ff3e6c;
+    text-decoration:none;
+    font-weight:700;
+}
+
+.extra-links a:hover{
+    text-decoration:underline;
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+    body{
+        padding:12px;
+        align-items:flex-start;
+    }
+
+    .top-links{
+        top:10px;
+        right:10px;
+        gap:8px;
+    }
+
+    .top-links a{
+        padding:10px 14px;
+        font-size:14px;
+        min-width:75px;
+    }
+
+    .container{
+        margin-top:55px;
+        padding:30px 22px;
+    }
+
+    .logo h1{
+        font-size:32px;
+    }
+
+    .heading h2{
+        font-size:26px;
+    }
+
+    .logo-icon{
+        width:55px;
+        height:55px;
+        font-size:24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- TOP RIGHT -->
+<div class="top-links">
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+</div>
+
+<div class="container">
+
+    <div class="logo">
+        <div class="logo-row">
+            <div class="logo-icon">🛍️</div>
+            <h1>Smart<span>Cart</span></h1>
+        </div>
+        <p>Your Smart Shopping Partner</p>
+    </div>
+
+    <div class="heading">
+        <h2>User Registration</h2>
+        <p>Create your SmartCart account</p>
+    </div>
+
+    <div class="flash-msg">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endwith %}
+    </div>
+
+    <form method="POST" action="/user-register">
+
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" placeholder="Enter your email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Create password" required>
+        </div>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <div class="extra-links">
+        <p>Already have an account? <a href="/">Login</a></p>
+    </div>
+
+</div>
+
+</body>
+</html>

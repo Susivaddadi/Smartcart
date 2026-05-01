@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f8f9fb;
+    color:#111827;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:linear-gradient(135deg,#ff3f6c,#ff5c85);
+    box-shadow:0 4px 15px rgba(0,0,0,0.12);
+    width:100%;
+}
+
+.header-inner{
+    max-width:1400px;
+    margin:auto;
+    padding:14px 22px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:14px;
+    position:relative;
+}
+
+/* BRAND */
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-icon{
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:#ffffff22;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+}
+
+.logo-text{
+    font-size:34px;
+    font-weight:900;
+    color:#fff;
+}
+
+.logo-text span{
+    color:#111827;
+}
+
+/* NAV */
+.nav-menu{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.nav-menu a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    padding:10px 18px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.12);
+    transition:0.3s;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active{
+    background:#fff;
+    color:#ff3f6c;
+}
+
+/* MENU BUTTON */
+.menu-toggle{
+    display:none;
+    font-size:30px;
+    color:#fff;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+/* FLASH */
+.flash{
+    max-width:1400px;
+    margin:auto;
+    padding:16px;
+}
+
+.flash p{
+    background:#e8fff0;
+    color:#0f7a35;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:10px;
+    font-weight:600;
+}
+
+/* FILTER */
+.filter-box{
+    max-width:1400px;
+    margin:auto;
+    padding:0 16px 16px;
+}
+
+.filter-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.search-box{flex:2;}
+.category-box{flex:1.3;}
+
+.search-box input,
+.category-box select{
+    width:100%;
+    padding:13px;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+}
+
+.search-box input:focus,
+.category-box select:focus{
+    border-color:#ff3f6c;
+}
+
+.filter-row button{
+    padding:13px 16px;
+    border:none;
+    border-radius:12px;
+    background:#ff3f6c;
+    color:#fff;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.filter-row button:hover{
+    background:#e7335f;
+}
+
+/* PRODUCTS */
+.product-container{
+    max-width:1400px;
+    margin:auto;
+    padding:0 16px 30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:18px;
+}
+
+.product-card{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.product-card:hover{
+    transform:translateY(-4px);
+}
+
+.product-card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.product-info{
+    padding:14px;
+}
+
+.product-info h3{
+    font-size:18px;
+    margin-bottom:6px;
+}
+
+.category{
+    font-size:14px;
+    color:#6b7280;
+    margin-bottom:6px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:800;
+    margin-bottom:14px;
+}
+
+.btn-group{
+    display:flex;
+    gap:8px;
+}
+
+.view-btn,
+.cart-btn{
+    flex:1;
+    text-align:center;
+    text-decoration:none;
+    padding:11px;
+    border-radius:10px;
+    font-weight:700;
+    font-size:14px;
+}
+
+.view-btn{
+    background:#ff3f6c;
+    color:#fff;
+}
+
+.cart-btn{
+    background:#111827;
+    color:#fff;
+}
+
+.view-btn:hover{
+    background:#e7335f;
+}
+
+.cart-btn:hover{
+    background:#000;
+}
+
+/* FOOTER */
+.footer{
+    text-align:center;
+    padding:22px 15px;
+    background:#ffffff;
+    color:#6b7280;
+    font-size:15px;
+    font-weight:600;
+    margin-top:20px;
+    border-top:1px solid #e5e7eb;
+}
+
+/* TABLET */
+@media(max-width:768px){
+
+    .logo-text{
+        font-size:26px;
+    }
+
+    .menu-toggle{
+        display:block;
+    }
+
+    .nav-menu{
+        display:none;
+        flex-direction:column;
+        position:absolute;
+        top:72px;
+        right:15px;
+        width:220px;
+        background:#ff4d7d;
+        padding:12px;
+        border-radius:14px;
+        box-shadow:0 8px 20px rgba(0,0,0,0.15);
+        z-index:999;
+    }
+
+    .nav-menu.show{
+        display:flex;
+    }
+
+    .nav-menu a{
+        width:100%;
+        text-align:center;
+        margin:4px 0;
+    }
+
+    .filter-row{
+        flex-direction:column;
+    }
+
+    .search-box,
+    .category-box,
+    .filter-row button{
+        width:100%;
+    }
+
+    .product-container{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .product-card img{
+        height:170px;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+    .header-inner{
+        padding:12px;
+    }
+
+    .logo-text{
+        font-size:24px;
+    }
+
+    .logo-icon{
+        width:40px;
+        height:40px;
+        font-size:20px;
+    }
+
+    .product-container{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .btn-group{
+        flex-direction:column;
+    }
+
+    .view-btn,
+    .cart-btn{
+        width:100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+<div class="header-inner">
+
+    <div class="brand">
+        <div class="logo-icon">🛍️</div>
+        <div class="logo-text">Smart<span>Cart</span></div>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <div class="nav-menu" id="mobileMenu">
+        <a href="/user-dashboard">Home</a>
+        <a href="/user/products" class="active">Products</a>
+        <a href="/user/cart">Cart</a>
+        <a href="/user/profile">Profile</a>
+        <a href="/user-logout">Logout</a>
+    </div>
+
+</div>
+</div>
+
+<!-- FLASH -->
+<div class="flash">
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% for category, message in messages %}
+<p>{{ message }}</p>
+{% endfor %}
+{% endwith %}
+</div>
+
+<!-- FILTER -->
+<div class="filter-box">
+
+<form method="GET" action="/user/products" class="filter-row">
+
+<div class="search-box">
+<input type="text" name="search"
+placeholder="Search products..."
+value="{{ request.args.get('search', '') }}">
+</div>
+
+<div class="category-box">
+<select name="category">
+<option value="">All Categories</option>
+
+{% for cat in categories %}
+<option value="{{ cat.category }}"
+{% if request.args.get('category') == cat.category %}selected{% endif %}>
+{{ cat.category }}
+</option>
+{% endfor %}
+
+</select>
+</div>
+
+<button type="submit">Apply</button>
+
+</form>
+
+</div>
+
+<!-- PRODUCTS -->
+<div class="product-container">
+
+{% for product in products %}
+<div class="product-card">
+
+<img src="/static/uploads/product_images/{{ product.image }}" alt="{{ product.name }}">
+
+<div class="product-info">
+<h3>{{ product.name }}</h3>
+<p class="category">{{ product.category }}</p>
+<p class="price">₹{{ product.price }}</p>
+
+<div class="btn-group">
+<a href="/user/product/{{ product.product_id }}" class="view-btn">View Details</a>
+<a href="/user/add-to-cart/{{ product.product_id }}" class="cart-btn">Add to Cart</a>
+</div>
+
+</div>
+</div>
+{% endfor %}
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+© 2026 SuchiVaddadi. All Rights Reserved.
+</div>
+
+<script>
+function toggleMenu(){
+    document.getElementById("mobileMenu").classList.toggle("show");
+}
+</script>
+
+</body>
+</html>

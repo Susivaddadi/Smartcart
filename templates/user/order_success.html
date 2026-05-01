@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order Successful - SmartCart</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f8f9fb;
+    color:#111827;
+    width:100%;
+    overflow-x:hidden;
+}
+
+/* HEADER */
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:linear-gradient(135deg,#ff3f6c,#ff6b8f);
+    box-shadow:0 2px 10px rgba(0,0,0,0.08);
+    width:100%;
+}
+
+.top-bar{
+    max-width:1400px;
+    margin:auto;
+    padding:14px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+/* BRAND */
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#fff;
+    color:#ff3f6c;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:22px;
+}
+
+.logo-text{
+    font-size:28px;
+    font-weight:900;
+    color:#fff;
+}
+
+.logo-text span{
+    color:#111827;
+}
+
+/* MENU */
+.menu-toggle{
+    display:none;
+    flex-direction:column;
+    gap:5px;
+    cursor:pointer;
+}
+
+.menu-toggle span{
+    width:28px;
+    height:3px;
+    background:#fff;
+    border-radius:5px;
+}
+
+#menu-btn{
+    display:none;
+}
+
+.nav-menu{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.nav-menu a{
+    text-decoration:none;
+    color:#fff;
+    font-weight:700;
+    padding:10px 18px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.12);
+    transition:0.3s;
+}
+
+.nav-menu a:hover{
+    background:#fff;
+    color:#ff3f6c;
+}
+
+/* PAGE */
+.success-container{
+    max-width:950px;
+    width:100%;
+    margin:30px auto;
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+}
+
+.success-header{
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:#fff;
+    padding:35px 24px;
+    text-align:center;
+}
+
+.success-header h2{
+    font-size:34px;
+    margin-bottom:10px;
+}
+
+.success-header p{
+    font-size:16px;
+}
+
+.content{
+    padding:28px;
+}
+
+.section-title{
+    font-size:22px;
+    color:#ff3f6c;
+    margin-bottom:14px;
+    border-bottom:2px solid #ffe4ec;
+    padding-bottom:8px;
+}
+
+.info-box{
+    background:#f8f9fb;
+    padding:18px;
+    border-radius:16px;
+    margin-bottom:24px;
+}
+
+.info-box p{
+    margin-bottom:10px;
+    line-height:1.6;
+    word-break:break-word;
+}
+
+/* TABLE */
+.table-wrap{
+    width:100%;
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+    min-width:500px;
+}
+
+th{
+    background:#111827;
+    color:#fff;
+    padding:14px;
+    text-align:left;
+}
+
+td{
+    padding:14px;
+    border-bottom:1px solid #eee;
+}
+
+tr:nth-child(even){
+    background:#fafafa;
+}
+
+/* BUTTONS */
+.btn-row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:24px;
+}
+
+.btn{
+    text-decoration:none;
+    padding:13px 18px;
+    border-radius:12px;
+    font-weight:800;
+    color:#fff;
+    background:#ff3f6c;
+    transition:0.3s;
+}
+
+.btn.dark{
+    background:#111827;
+}
+
+.btn.green{
+    background:#16a34a;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* FOOTER */
+.footer{
+    margin-top:40px;
+    background:#ffffff;
+    color:#111827;
+    text-align:center;
+    padding:16px 10px;
+    font-size:14px;
+    border-top:1px solid #e5e7eb;
+}
+
+/* TABLET */
+@media(max-width:768px){
+
+    .top-bar{
+        flex-wrap:wrap;
+    }
+
+    .menu-toggle{
+        display:flex;
+    }
+
+    .nav-menu{
+        display:none;
+        width:100%;
+        flex-direction:column;
+        margin-top:10px;
+    }
+
+    #menu-btn:checked ~ .nav-menu{
+        display:flex;
+    }
+
+    .nav-menu a{
+        width:100%;
+        text-align:center;
+    }
+
+    .logo-text{
+        font-size:24px;
+    }
+
+    .success-header h2{
+        font-size:26px;
+    }
+
+    .content{
+        padding:22px 16px;
+    }
+
+    .btn{
+        width:100%;
+        text-align:center;
+    }
+}
+
+/* MOBILE */
+@media(max-width:480px){
+
+    .success-container{
+        margin:20px 10px;
+        border-radius:18px;
+    }
+
+    .success-header{
+        padding:26px 16px;
+    }
+
+    .success-header h2{
+        font-size:22px;
+    }
+
+    .section-title{
+        font-size:18px;
+    }
+
+    .info-box{
+        padding:14px;
+    }
+
+    th,td{
+        padding:12px;
+        font-size:14px;
+    }
+
+    .footer{
+        font-size:13px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <div class="top-bar">
+
+        <div class="brand">
+            <div class="logo-icon">📍</div>
+            <div class="logo-text">Smart<span>Cart</span></div>
+        </div>
+
+        <input type="checkbox" id="menu-btn">
+
+        <label for="menu-btn" class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <div class="nav-menu">
+            <a href="/user-dashboard">Home</a>
+            <a href="/user/products">Products</a>
+            <a href="/user/cart">Cart</a>
+            <a href="/user/profile">Profile</a>
+            <a href="/user-logout">Logout</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- BODY -->
+<div class="success-container">
+
+    <div class="success-header">
+        <h2>🎉 Your Order is Confirmed!</h2>
+        <p>Thank you for shopping with <strong>SmartCart</strong>.</p>
+    </div>
+
+    <div class="content">
+
+        <h3 class="section-title">Order Details</h3>
+
+        <div class="info-box">
+            <p><strong>Order ID:</strong> {{ order.order_id }}</p>
+            <p><strong>Payment ID:</strong> {{ order.razorpay_payment_id }}</p>
+            <p><strong>Amount Paid:</strong> ₹{{ order.amount }}</p>
+            <p><strong>Order Date:</strong> {{ order.created_at }}</p>
+        </div>
+
+        <h3 class="section-title">Delivery Address</h3>
+
+        <div class="info-box">
+            <p><strong>Name:</strong> {{ address.name }}</p>
+            <p><strong>Address:</strong> {{ address.address }}</p>
+            <p><strong>City:</strong> {{ address.city }}</p>
+            <p><strong>Pincode:</strong> {{ address.pincode }}</p>
+        </div>
+
+        <h3 class="section-title">Order Summary</h3>
+
+        <div class="table-wrap">
+            <table>
+                <tr>
+                    <th>Product</th>
+                    <th>Qty</th>
+                    <th>Price (₹)</th>
+                </tr>
+
+                {% for it in items %}
+                <tr>
+                    <td>{{ it.product_name }}</td>
+                    <td>{{ it.quantity }}</td>
+                    <td>₹{{ it.price }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+        <div class="btn-row">
+            <a href="/user/products" class="btn">Continue Shopping</a>
+            <a href="/user/my-orders" class="btn dark">View My Orders</a>
+            <a href="/user/download-invoice/{{ order.order_id }}" class="btn green">Download Invoice</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 SuchiVaddadi. All Rights Reserved
+</div>
+
+</body>
+</html>
